@@ -1,6 +1,10 @@
 import requests
 from datetime import datetime
-import xlsxwriter
+import smtplib
+import email.message
+
+data_hoje = datetime.now()
+data_e_hora_em_texto = data_hoje.strftime('%d/%m/%Y %H:%M')
 
 requisicao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
 
@@ -9,21 +13,35 @@ cotacao_dolar = requisicao_dic["USDBRL"]["bid"]
 cotacao_euro = requisicao_dic["EURBRL"]["bid"]
 cotacao_btc = requisicao_dic["BTCBRL"]["bid"]
 
-print(f"Cotação Atualizadas. {datetime.now()}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
+def enviar_email(Data, Dolar, Euro, BTC): 
+    Data = Data
+    Dolar = Dolar
+    Euro = Euro
+    BTC = BTC
 
-workbook = xlsxwriter.Workbook('cots.xlsx')
-worksheet = workbook.add_worksheet()
+    corpo_email = f"""
+    <p><b>Cotação Atualizadas em {Data} </b></p>
+    <p>Dólar: R$ {Dolar}</p>
+    <p>Euro: R$ {Euro}</p>
+    <p>BTC: R$ {BTC}</p>
+    """
+
+    msg = email.message.Message()
+    msg['Subject'] = 'Cotações de hoje - ' + data_e_hora_em_texto
+    msg['From'] = 'rafael.ti.net@gmail.com'
+    msg['To'] = 'rafael.ti.net@gmail.com'
+    password = 'imtszprgviibeaki'
+    msg.add_header('Content-Type', 'text/html')
+    msg.set_payload(corpo_email )
+
+    s = smtplib.SMTP('smtp.gmail.com: 587')
+    s.starttls()
+    # Login Credentials for sending the mail
+    s.login(msg['From'], password)
+    s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    print('Email enviado')
 
 
-worksheet.write(0, 0, "Data/Hora")        
-worksheet.write(0, 1, "Dolar") 
-worksheet.write(0, 2, "Euro")   
-worksheet.write(0, 3, "Bitcoin") 
+enviar_email(data_e_hora_em_texto,cotacao_dolar,cotacao_euro,cotacao_btc)
 
-worksheet.write(1, 0, str(datetime.now())) 
-worksheet.write(1, 1, cotacao_dolar) 
-worksheet.write(1, 2,cotacao_euro) 
-worksheet.write(1, 3,cotacao_btc)
-
-workbook.close()
-
+print(f"Cotação Atualizadas. {data_e_hora_em_texto}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
