@@ -8,4 +8,4 @@ cotacao_dolar = requisicao_dic["USDBRL"]["bid"]
 cotacao_euro = requisicao_dic["EURBRL"]["bid"]
 cotacao_btc = requisicao_dic["BTCBRL"]["bid"]
 
-print(f"Cotação Atualizada2. {datetime.now()}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
+print(f"Cotação Atualizada54. {datetime.now()}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
