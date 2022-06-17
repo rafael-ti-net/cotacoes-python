@@ -28,9 +28,9 @@ def enviar_email(Data, Dolar, Euro, BTC):
 
     msg = email.message.Message()
     msg['Subject'] = 'Cotações de hoje - ' + data_e_hora_em_texto
-    msg['From'] = 'rafael.ti.net@gmail.com'
-    msg['To'] = 'rafael.ti.net@gmail.com'
-    password = 'imtszprgviibeaki'
+    msg['From'] = 'seuemail@gmail.com'
+    msg['To'] = 'seuemail@gmail.com'
+    password = 'XXXXXX'
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(corpo_email )
 
