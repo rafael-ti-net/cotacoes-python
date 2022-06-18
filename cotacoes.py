@@ -4,7 +4,7 @@ import smtplib
 import email.message
 
 data_hoje = datetime.now()
-data_e_hora_em_texto = data_hoje.strftime('%d/%m/%Y %H:%M')
+data_e_hora_em_texto = data_hoje.strftime('%d/%m/%Y às %H:%M')
 
 requisicao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
 
@@ -28,9 +28,9 @@ def enviar_email(Data, Dolar, Euro, BTC):
 
     msg = email.message.Message()
     msg['Subject'] = 'Cotações de hoje - ' + data_e_hora_em_texto
-    msg['From'] = 'rafael.ti.net@gmail.com'
+    msg['From'] = 'robo.python.heroku@gmail.com'
     msg['To'] = 'rafael.ti.net@gmail.com'
-    password = 'imtszprgviibeaki'
+    password = 'cpxbrmqmbhlvarjk'
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(corpo_email )
 
