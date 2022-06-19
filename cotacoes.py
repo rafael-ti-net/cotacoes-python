@@ -26,7 +26,6 @@ def enviar_email(Data, Dolar, Euro, BTC):
     <p>Euro: R$ {Euro}</p>
     <p>BTC: R$ {BTC}</p>
     """
-
     msg = email.message.Message()
     msg['Subject'] = 'Cotações de hoje - ' + data_e_hora_em_texto
     msg['From'] = 'robo.python.heroku@gmail.com'
@@ -41,7 +40,6 @@ def enviar_email(Data, Dolar, Euro, BTC):
     s.login(msg['From'], password)
     s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
     print('Email enviado')
-
 
 enviar_email(data_e_hora_em_texto,cotacao_dolar,cotacao_euro,cotacao_btc)
 

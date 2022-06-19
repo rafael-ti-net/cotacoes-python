@@ -14,9 +14,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 def main(*args):
-        
     creds = None
-    
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     
@@ -27,7 +25,6 @@ def main(*args):
             flow = InstalledAppFlow.from_client_secrets_file(
                 'client_secret.json', SCOPES)
             creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
@@ -39,9 +36,7 @@ def main(*args):
                                     range='Pagina1!A1:J20').execute()
         values = result.get('values', [])
        
-        valores_adicionar = [
-            [*args],
-        ]        
+        valores_adicionar = [[*args]]        
         ultima_linha = len(values) + 1
 
         result = result = sheet.values().update(spreadsheetId='1RM-QmVcRTagSRqZAl1p2hhxbhd5kBhW0Qns-m2FVeoo',
@@ -52,7 +47,6 @@ def main(*args):
 
     except HttpError as err:
         print(err)
-
 
 if __name__ == '__main__':
     main()
