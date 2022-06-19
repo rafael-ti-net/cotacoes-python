@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 import smtplib
 import email.message
+import exportaGoogleSheets
 
 data_hoje = datetime.now()
 data_e_hora_em_texto = data_hoje.strftime('%d/%m/%Y às %H:%M')
@@ -45,3 +46,5 @@ def enviar_email(Data, Dolar, Euro, BTC):
 enviar_email(data_e_hora_em_texto,cotacao_dolar,cotacao_euro,cotacao_btc)
 
 print(f"Cotação Atualizadas. {data_e_hora_em_texto}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
+
+exportaGoogleSheets.main(data_e_hora_em_texto, cotacao_dolar,cotacao_euro,cotacao_btc)
