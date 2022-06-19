@@ -21,7 +21,7 @@ def enviar_email(Data, Dolar, Euro, BTC):
     BTC = BTC
 
     corpo_email = f"""
-    <p><b>Cotação Atualizadas em {Data} </b></p>
+    <p><b>Cotação Atualizada em {Data} </b></p>
     <p>Dólar: R$ {Dolar}</p>
     <p>Euro: R$ {Euro}</p>
     <p>BTC: R$ {BTC}</p>
@@ -45,6 +45,6 @@ def enviar_email(Data, Dolar, Euro, BTC):
 
 enviar_email(data_e_hora_em_texto,cotacao_dolar,cotacao_euro,cotacao_btc)
 
-print(f"Cotação Atualizadas. {data_e_hora_em_texto}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
+print(f"Cotação Atualizada. {data_e_hora_em_texto}\nDólar: R${cotacao_dolar}\nEuro: R${cotacao_euro}\nBTC: R${cotacao_btc}")
 
 exportaGoogleSheets.main(data_e_hora_em_texto, cotacao_dolar,cotacao_euro,cotacao_btc)
